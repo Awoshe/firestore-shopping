@@ -11,7 +11,7 @@
   <form [formGroup]="createUserForm" (submit)="createUser()" novalidate>
     <ion-item>
       <ion-label stacked>Email</ion-label>
-      <ion-input formControlName="email" type="email" placeholder="Your email address">
+      <ion-input formControlName="email" type="email" placeholder="Email address">
       </ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="!createUserForm.controls.email.valid && createUserForm.controls.email.dirty">
@@ -19,7 +19,7 @@
     </ion-item>
 
     <button ion-button block type="submit" [disabled]="!createUserForm.valid">
-      Log In
+      Add new User
     </button>
   </form>
 </ion-content>
