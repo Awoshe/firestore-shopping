@@ -33,7 +33,7 @@ export class AuthProvider {
       userProfile
     > = this.fireStore.doc(`userProfile/${adminUser.uid}`);
 
-    userProfileDocument.set({
+    await userProfileDocument.set({
       id: adminUser.uid,
       email: email,
       teamId: adminUser.uid,
@@ -44,7 +44,7 @@ export class AuthProvider {
       teamProfile
     > = this.fireStore.doc(`teamProfile/${adminUser.uid}`);
 
-    teamProfile.set({
+    await teamProfile.set({
       id: adminUser.uid,
       teamAdmin: adminUser.uid,
       groceryList: null
