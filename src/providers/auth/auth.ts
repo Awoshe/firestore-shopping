@@ -29,11 +29,11 @@ export class AuthProvider {
       password
     );
 
-    const userProfileCollection: AngularFirestoreDocument<
+    const userProfileDocument: AngularFirestoreDocument<
       userProfile
     > = this.fireStore.doc(`userProfile/${adminUser.uid}`);
 
-    userProfileCollection.set({
+    userProfileDocument.set({
       id: adminUser.uid,
       email: email,
       teamId: adminUser.uid,
