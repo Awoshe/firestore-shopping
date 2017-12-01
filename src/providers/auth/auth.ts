@@ -24,7 +24,8 @@ export class AuthProvider {
     email: string,
     password: string
   ): Promise<firebase.User> {
-    const adminUser: firebase.User = await this.afAuth.auth.createUserWithEmailAndPassword(
+    try {
+      const adminUser: firebase.User = await this.afAuth.auth.createUserWithEmailAndPassword(
       email,
       password
     );
@@ -51,6 +52,9 @@ export class AuthProvider {
     });
 
     return adminUser;
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   createRegularUser(email: string): Promise<any> {

@@ -42,8 +42,7 @@ export class LoginPage {
     if (!this.loginForm.valid) {
       console.log('Form not ready');
     } else {
-      let loading: Loading;
-      loading = this.loadingCtrl.create();
+      let loading: Loading = this.loadingCtrl.create();
       loading.present();
 
       const email: string = this.loginForm.value.email;
