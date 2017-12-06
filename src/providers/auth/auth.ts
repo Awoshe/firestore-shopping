@@ -26,32 +26,32 @@ export class AuthProvider {
   ): Promise<firebase.User> {
     try {
       const adminUser: firebase.User = await this.afAuth.auth.createUserWithEmailAndPassword(
-      email,
-      password
-    );
+        email,
+        password
+      );
 
-    const userProfileDocument: AngularFirestoreDocument<
-      userProfile
-    > = this.fireStore.doc(`userProfile/${adminUser.uid}`);
+      const userProfileDocument: AngularFirestoreDocument<
+        userProfile
+      > = this.fireStore.doc(`userProfile/${adminUser.uid}`);
 
-    await userProfileDocument.set({
-      id: adminUser.uid,
-      email: email,
-      teamId: adminUser.uid,
-      teamAdmin: true
-    });
+      await userProfileDocument.set({
+        id: adminUser.uid,
+        email: email,
+        teamId: adminUser.uid,
+        teamAdmin: true
+      });
 
-    const teamProfile: AngularFirestoreDocument<
-      teamProfile
-    > = this.fireStore.doc(`teamProfile/${adminUser.uid}`);
+      const teamProfile: AngularFirestoreDocument<
+        teamProfile
+      > = this.fireStore.doc(`teamProfile/${adminUser.uid}`);
 
-    await teamProfile.set({
-      id: adminUser.uid,
-      teamAdmin: adminUser.uid,
-      groceryList: null
-    });
+      await teamProfile.set({
+        id: adminUser.uid,
+        teamAdmin: adminUser.uid,
+        groceryList: null
+      });
 
-    return adminUser;
+      return adminUser;
     } catch (error) {
       console.error(error);
     }
