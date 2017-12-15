@@ -14,7 +14,7 @@
       <ion-input formControlName="email" type="email" placeholder="Email address">
       </ion-input>
     </ion-item>
-    <ion-item class="error-message" *ngIf="!createUserForm.controls.email.valid && createUserForm.controls.email.dirty">
+    <ion-item class="error-message" *ngIf="!createUserForm.controls.email.valid && createUserForm.controls.email.touched">
       <p>Please enter a valid email address.</p>
     </ion-item>
 
