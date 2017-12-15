@@ -32,21 +32,22 @@ export class InventoryProvider {
   }
 
   getGroceryList(teamId: string): AngularFirestoreCollection<Grocery> {
-    return this.fireStore.collection<
-      Grocery
-    >(`/teamProfile/${teamId}/groceryList`, ref => ref.orderBy('quantity'));
+    return this.fireStore.collection<Grocery>(
+      `/teamProfile/${teamId}/groceryList`,
+      ref => ref.orderBy('quantity')
+    );
   }
 
   getGroceryListForShoppingList(
     teamId: string,
     isInShoppingList: boolean
   ): AngularFirestoreCollection<Grocery> {
-    return this.fireStore.collection<
-      Grocery
-    >(`/teamProfile/${teamId}/groceryList`, ref =>
-      ref
-        .where('inShoppingList', '==', isInShoppingList)
-        .where('picked', '==', false)
+    return this.fireStore.collection<Grocery>(
+      `/teamProfile/${teamId}/groceryList`,
+      ref =>
+        ref
+          .where('inShoppingList', '==', isInShoppingList)
+          .where('picked', '==', false)
     );
   }
 
@@ -54,12 +55,12 @@ export class InventoryProvider {
     teamId: string,
     isInShoppingList: boolean
   ): AngularFirestoreCollection<Grocery> {
-    return this.fireStore.collection<
-      Grocery
-    >(`/teamProfile/${teamId}/groceryList`, ref =>
-      ref
-        .where('inShoppingList', '==', isInShoppingList)
-        .where('picked', '==', true)
+    return this.fireStore.collection<Grocery>(
+      `/teamProfile/${teamId}/groceryList`,
+      ref =>
+        ref
+          .where('inShoppingList', '==', isInShoppingList)
+          .where('picked', '==', true)
     );
   }
 

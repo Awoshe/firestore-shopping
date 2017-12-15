@@ -8,26 +8,18 @@ import {
 import firebase from 'firebase/app';
 import { userProfile } from '../../models/user-profile';
 import { teamProfile } from '../../models/team-profile';
+import { InventoryProvider } from '../inventory/inventory';
 
 @Injectable()
 export class AuthProvider {
   constructor(
     public afAuth: AngularFireAuth,
-    public fireStore: AngularFirestore
+    public fireStore: AngularFirestore,
+    public inventoryProvider: InventoryProvider
   ) {}
 
   loginUser(email: string, password: string): Promise<firebase.User> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
-  }
-
-  async getTeamId(): Promise<string> {
-    const userId: string = this.afAuth.auth.currentUser.uid;
-    const userProfile: firebase.firestore.DocumentSnapshot = await firebase
-      .firestore()
-      .doc(`userProfile/${userId}`)
-      .get();
-
-    return userProfile.data().teamId;
   }
 
   async createAdminUser(
@@ -70,7 +62,7 @@ export class AuthProvider {
   }
 
   async createRegularUser(email: string): Promise<any> {
-    const teamId: string = await this.getTeamId();
+    const teamId: string = await this.inventoryProvider.getTeamId();
 
     const userCollection: AngularFirestoreCollection<
       any
