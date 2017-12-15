@@ -20,6 +20,16 @@ export class AuthProvider {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
+  async getTeamId(): Promise<string> {
+    const userId: string = this.afAuth.auth.currentUser.uid;
+    const userProfile: firebase.firestore.DocumentSnapshot = await firebase
+      .firestore()
+      .doc(`userProfile/${userId}`)
+      .get();
+
+    return userProfile.data().teamId;
+  }
+
   async createAdminUser(
     email: string,
     password: string
@@ -34,19 +44,21 @@ export class AuthProvider {
         userProfile
       > = this.fireStore.doc(`userProfile/${adminUser.uid}`);
 
+      const teamId: string = this.fireStore.createId();
+
       await userProfileDocument.set({
         id: adminUser.uid,
         email: email,
-        teamId: adminUser.uid,
+        teamId: teamId,
         teamAdmin: true
       });
 
       const teamProfile: AngularFirestoreDocument<
         teamProfile
-      > = this.fireStore.doc(`teamProfile/${adminUser.uid}`);
+      > = this.fireStore.doc(`teamProfile/${teamId}`);
 
       await teamProfile.set({
-        id: adminUser.uid,
+        id: teamId,
         teamAdmin: adminUser.uid,
         groceryList: null
       });
@@ -57,19 +69,18 @@ export class AuthProvider {
     }
   }
 
-  createRegularUser(email: string): Promise<any> {
-    const teamAdmin: firebase.User = this.afAuth.auth.currentUser;
+  async createRegularUser(email: string): Promise<any> {
+    const teamId: string = await this.getTeamId();
+
     const userCollection: AngularFirestoreCollection<
       any
-    > = this.fireStore.collection(
-      `teamProfile/${teamAdmin.uid}/teamMemberList`
-    );
+    > = this.fireStore.collection(`teamProfile/${teamId}/teamMemberList`);
     const id: string = this.fireStore.createId();
 
     const regularUser = {
       id: id,
       email: email,
-      teamId: teamAdmin.uid
+      teamId: teamId
     };
 
     return userCollection.add(regularUser);
