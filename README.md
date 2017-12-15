@@ -1,26 +1,38 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+# Master FireStore for Ionic Framework
 
-## How to use this template
+The FireStore Shopping app is the showcased app in the book: **Master FireStore for Ionic Framework** which covers:
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
+* User Authentication.
+* CRUD.
+* Transactions.
+* Cloud Functions Triggers for FireStore
+* FireStore Security Rules.
+* ...and more.
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
+## Installation
 
-### With the Ionic CLI:
+Clone this repository using ssh:
 
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myTabs tabs
+```sh
+$ git clone git@github.com:javebratt/firestore-shopping.git
 ```
 
-Then, to run it, cd into `myTabs` and run:
+Or https:
 
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
+```sh
+$ git clone https://github.com/javebratt/firestore-shopping.git
 ```
 
-Substitute ios for android if not on a Mac.
+Once cloned, move into the app folder and edit the name of the file
+`app/credentials.backup.ts` to be simply `app/credentials.ts`.
 
+Inside that file you'll add your Firebase keys which you can get from
+[the Firebase Console](https://console.firebase.google.com)
+
+## Usage example
+
+You can get the book now available for pre-order, I'm going to ship it before 2017 is over :) [get the book](https://sowl.co/M119n).
+
+## Who am I?
+
+Jorge Vergara – [@javebratt](https://twitter.com/javebratt) – j@javebratt.com
