@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import {
   AngularFirestore,
-  AngularFirestoreCollection
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
 } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import { Grocery } from '../../models/grocery';
@@ -92,7 +93,7 @@ export class InventoryProvider {
     quantity: number,
     teamId: string
   ): Promise<void> {
-    const groceryRef = this.fireStore.doc(
+    const groceryRef: firebase.firestore.DocumentReference = this.fireStore.doc(
       `/teamProfile/${teamId}/groceryList/${groceryId}`
     ).ref;
 
@@ -122,7 +123,7 @@ export class InventoryProvider {
   }
 
   addGroceryToShoppingList(groceryId: string, teamId: string): Promise<void> {
-    const groceryRef = this.fireStore.doc(
+    const groceryRef: AngularFirestoreDocument<Grocery> = this.fireStore.doc(
       `/teamProfile/${teamId}/groceryList/${groceryId}`
     );
 
@@ -131,7 +132,7 @@ export class InventoryProvider {
     });
   }
 
-  removeGroceryFromShoppingList(
+  /* removeGroceryFromShoppingList(
     groceryId: string,
     teamId: string
   ): Promise<void> {
@@ -142,14 +143,14 @@ export class InventoryProvider {
     return groceryRef.update({
       inShoppingList: false
     });
-  }
+  } */
 
   pickUpGroceryFromShoppingList(
     groceryId: string,
     quantityShopping: number,
     teamId: string
   ): Promise<void> {
-    const groceryRef = this.fireStore.doc(
+    const groceryRef: firebase.firestore.DocumentReference = this.fireStore.doc(
       `/teamProfile/${teamId}/groceryList/${groceryId}`
     ).ref;
 
@@ -172,7 +173,7 @@ export class InventoryProvider {
     quantityShopping: number,
     teamId: string
   ): Promise<void> {
-    const groceryRef = this.fireStore.doc(
+    const groceryRef: firebase.firestore.DocumentReference = this.fireStore.doc(
       `/teamProfile/${teamId}/groceryList/${groceryId}`
     ).ref;
 
@@ -184,8 +185,7 @@ export class InventoryProvider {
           groceryDoc.data().quantityShopping + quantityShopping;
         transaction.update(groceryRef, {
           quantity: newQuantity,
-          quantityShopping: newQuantityShopping,
-          picked: true
+          quantityShopping: newQuantityShopping
         });
       });
     });
@@ -196,7 +196,7 @@ export class InventoryProvider {
     quantityShopping: number,
     teamId: string
   ): Promise<void> {
-    const groceryRef = this.fireStore.doc(
+    const groceryRef: firebase.firestore.DocumentReference = this.fireStore.doc(
       `/teamProfile/${teamId}/groceryList/${groceryId}`
     ).ref;
 
@@ -209,7 +209,7 @@ export class InventoryProvider {
         transaction.update(groceryRef, {
           quantity: newQuantity,
           quantityShopping: newQuantityShopping,
-          picked: true
+          picked: newQuantityShopping <= 0 ? false : true
         });
       });
     });

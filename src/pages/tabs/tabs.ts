@@ -6,8 +6,8 @@ import { ShoppingListPage } from '../shopping-list/shopping-list';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-  tab1Root = ShoppingListPage;
-  tab2Root = InventoryPage;
+  tab1Root = InventoryPage;
+  tab2Root = ShoppingListPage;
 
   constructor() {}
 }
