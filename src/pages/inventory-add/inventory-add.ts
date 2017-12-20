@@ -17,7 +17,7 @@ import { InventoryProvider } from '../../providers/inventory/inventory';
   templateUrl: 'inventory-add.html'
 })
 export class InventoryAddPage {
-  inShoppingList: boolean;
+  inShoppingList: boolean = false;
   addGroceryForm: FormGroup;
   teamId: string;
 
