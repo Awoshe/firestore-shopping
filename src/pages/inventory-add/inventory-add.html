@@ -14,7 +14,7 @@
       <ion-input formControlName="name" type="text" placeholder="What are you adding?">
       </ion-input>
     </ion-item>
-    <ion-item class="error-message" *ngIf="!addGroceryForm.controls.name.valid && addGroceryForm.controls.name.dirty">
+    <ion-item class="error-message" *ngIf="!addGroceryForm.controls.name.valid && addGroceryForm.controls.name.touched">
       <p>You need to enter its name.</p>
     </ion-item>
 
@@ -23,7 +23,7 @@
       <ion-input formControlName="quantity" type="number" placeholder="How many are you adding?">
       </ion-input>
     </ion-item>
-    <ion-item class="error-message" *ngIf="!addGroceryForm.controls.quantity.valid && addGroceryForm.controls.quantity.dirty">
+    <ion-item class="error-message" *ngIf="!addGroceryForm.controls.quantity.valid && addGroceryForm.controls.quantity.touched">
       <p>You need to enter how many you're adding.</p>
     </ion-item>
 
