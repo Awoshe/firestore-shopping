@@ -3,9 +3,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
-  AngularFirestoreDocument
+  AngularFirestoreDocument,
 } from 'angularfire2/firestore';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import { Grocery } from '../../models/grocery';
 
 @Injectable()
@@ -84,7 +84,7 @@ export class InventoryProvider {
         teamId,
         inShoppingList,
         picked: false,
-        quantityShopping: 0
+        quantityShopping: 0,
       });
   }
 
@@ -128,22 +128,9 @@ export class InventoryProvider {
     );
 
     return groceryRef.update({
-      inShoppingList: true
+      inShoppingList: true,
     });
   }
-
-  /* removeGroceryFromShoppingList(
-    groceryId: string,
-    teamId: string
-  ): Promise<void> {
-    const groceryRef = this.fireStore.doc(
-      `/teamProfile/${teamId}/groceryList/${groceryId}`
-    );
-
-    return groceryRef.update({
-      inShoppingList: false
-    });
-  } */
 
   pickUpGroceryFromShoppingList(
     groceryId: string,
@@ -162,7 +149,7 @@ export class InventoryProvider {
         transaction.update(groceryRef, {
           quantity: newQuantity,
           quantityShopping: quantityShopping,
-          picked: true
+          picked: true,
         });
       });
     });
@@ -185,7 +172,7 @@ export class InventoryProvider {
           groceryDoc.data().quantityShopping + quantityShopping;
         transaction.update(groceryRef, {
           quantity: newQuantity,
-          quantityShopping: newQuantityShopping
+          quantityShopping: newQuantityShopping,
         });
       });
     });
@@ -209,7 +196,7 @@ export class InventoryProvider {
         transaction.update(groceryRef, {
           quantity: newQuantity,
           quantityShopping: newQuantityShopping,
-          picked: newQuantityShopping <= 0 ? false : true
+          picked: newQuantityShopping <= 0 ? false : true,
         });
       });
     });
