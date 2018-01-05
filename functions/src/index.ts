@@ -14,7 +14,7 @@ exports.createTeamMember = functions.firestore
     const newUser: UserRecord = await admin.auth().createUser({
       uid: id,
       email: email,
-      password: '123456789',
+      password: '123456789'
     });
 
     await admin
@@ -24,7 +24,7 @@ exports.createTeamMember = functions.firestore
         email: email,
         id: id,
         teamId: teamId,
-        teamAdmin: false,
+        teamAdmin: false
       });
 
     return newUser;
