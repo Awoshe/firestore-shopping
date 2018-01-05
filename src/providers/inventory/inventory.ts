@@ -189,4 +189,14 @@ export class InventoryProvider {
       });
     });
   }
+
+  addGroceryToShoppingList(groceryId: string, teamId: string): Promise<void> {
+    const groceryRef: AngularFirestoreDocument<Grocery> = this.fireStore.doc(
+      `/teamProfile/${teamId}/groceryList/${groceryId}`
+    );
+
+    return groceryRef.update({
+      inShoppingList: true,
+    });
+  }
 }

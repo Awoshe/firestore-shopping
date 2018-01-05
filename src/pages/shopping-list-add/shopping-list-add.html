@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ShoppingListAddPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -12,7 +6,16 @@
 
 </ion-header>
 
-
 <ion-content padding>
+  <h3>Add groceries to your shopping list</h3>
 
+  <ion-list>
+    <ion-item *ngFor="let grocery of groceryList | async">
+      {{ grocery.name }}
+      <button ion-button item-end (click)="addGrocery(grocery.id,
+        grocery.teamId)">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
 </ion-content>
