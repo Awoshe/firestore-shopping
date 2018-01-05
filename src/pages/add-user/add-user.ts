@@ -24,7 +24,7 @@ export class AddUserPage {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public authProvider: AuthProvider,
-    private formBuilder: FormBuilder
+    public formBuilder: FormBuilder
   ) {
     this.createUserForm = formBuilder.group({
       email: [
