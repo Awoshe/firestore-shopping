@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
+  AngularFirestoreDocument,
 } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import { Grocery } from '../../models/grocery';
