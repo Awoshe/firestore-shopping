@@ -37,4 +37,28 @@ export class SignupPage {
       ],
     });
   }
+
+  async signupUser(): Promise<any> {
+    if (!this.signupForm.valid) {
+      console.log('Form not ready');
+    } else {
+      let loading: Loading;
+      loading = this.loadingCtrl.create();
+      loading.present();
+      const email: string = this.signupForm.value.email;
+      const password: string = this.signupForm.value.password;
+      try {
+        await this.authProvider.createAdminUser(email, password);
+        await loading.dismiss();
+        this.navCtrl.setRoot(TabsPage);
+      } catch (error) {
+        await loading.dismiss();
+        const alert: Alert = this.alertCtrl.create({
+          message: error.message,
+          buttons: [{ text: 'Ok', role: 'cancel' }],
+        });
+        alert.present();
+      }
+    }
+  }
 }
