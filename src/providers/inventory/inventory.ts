@@ -7,6 +7,7 @@ import {
 } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import { Grocery } from '../../models/grocery';
+import { DocumentReference } from '@firebase/firestore-types';
 
 @Injectable()
 export class InventoryProvider {
@@ -43,7 +44,7 @@ export class InventoryProvider {
     quantity: number,
     teamId: string
   ): Promise<void> {
-    const groceryRef: firebase.firestore.DocumentReference = this.fireStore.doc(
+    const groceryRef: DocumentReference = this.fireStore.doc(
       `/teamProfile/${teamId}/groceryList/${groceryId}`
     ).ref;
 
@@ -126,7 +127,7 @@ export class InventoryProvider {
     quantityShopping: number,
     teamId: string
   ): Promise<void> {
-    const groceryRef: firebase.firestore.DocumentReference = this.fireStore.doc(
+    const groceryRef: DocumentReference = this.fireStore.doc(
       `/teamProfile/${teamId}/groceryList/${groceryId}`
     ).ref;
 
@@ -149,7 +150,7 @@ export class InventoryProvider {
     quantityShopping: number,
     teamId: string
   ): Promise<void> {
-    const groceryRef: firebase.firestore.DocumentReference = this.fireStore.doc(
+    const groceryRef: DocumentReference = this.fireStore.doc(
       `/teamProfile/${teamId}/groceryList/${groceryId}`
     ).ref;
 
@@ -172,7 +173,7 @@ export class InventoryProvider {
     quantityShopping: number,
     teamId: string
   ): Promise<void> {
-    const groceryRef: firebase.firestore.DocumentReference = this.fireStore.doc(
+    const groceryRef: DocumentReference = this.fireStore.doc(
       `/teamProfile/${teamId}/groceryList/${groceryId}`
     ).ref;
 
