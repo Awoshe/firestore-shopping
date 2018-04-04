@@ -1,20 +1,20 @@
-import * as functions from 'firebase-functions';
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp();
 
-import * as admin from 'firebase-admin';
 import { UserRecord } from 'firebase-functions/lib/providers/auth';
-admin.initializeApp(functions.config().firebase);
 
 exports.createTeamMember = functions.firestore
   .document(`teamProfile/{teamId}/teamMemberList/{newUserId}`)
-  .onCreate(async event => {
-    const id: string = event.data.data().id;
-    const email: string = event.data.data().email;
-    const teamId: string = event.data.data().teamId;
+  .onCreate(async (snapshot, context) => {
+    const id: string = snapshot.data().id;
+    const email: string = snapshot.data().email;
+    const teamId: string = snapshot.data().teamId;
 
     const newUser: UserRecord = await admin.auth().createUser({
       uid: id,
       email: email,
-      password: '123456789'
+      password: '123456789',
     });
 
     await admin
@@ -24,7 +24,7 @@ exports.createTeamMember = functions.firestore
         email: email,
         id: id,
         teamId: teamId,
-        teamAdmin: false
+        teamAdmin: false,
       });
 
     return newUser;

@@ -8,19 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-admin.initializeApp(functions.config().firebase);
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp();
 exports.createTeamMember = functions.firestore
     .document(`teamProfile/{teamId}/teamMemberList/{newUserId}`)
-    .onCreate((event) => __awaiter(this, void 0, void 0, function* () {
-    const id = event.data.data().id;
-    const email = event.data.data().email;
-    const teamId = event.data.data().teamId;
+    .onCreate((snapshot, context) => __awaiter(this, void 0, void 0, function* () {
+    const id = snapshot.data().id;
+    const email = snapshot.data().email;
+    const teamId = snapshot.data().teamId;
     const newUser = yield admin.auth().createUser({
         uid: id,
         email: email,
-        password: '123456789'
+        password: '123456789',
     });
     yield admin
         .firestore()
@@ -29,7 +29,7 @@ exports.createTeamMember = functions.firestore
         email: email,
         id: id,
         teamId: teamId,
-        teamAdmin: false
+        teamAdmin: false,
     });
     return newUser;
 }));
