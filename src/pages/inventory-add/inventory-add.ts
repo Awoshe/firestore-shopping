@@ -6,7 +6,7 @@ import {
   Loading,
   LoadingController,
   NavController,
-  NavParams,
+  NavParams
 } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InventoryProvider } from '../../providers/inventory/inventory';
@@ -33,7 +33,7 @@ export class InventoryAddPage {
     this.addGroceryForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       quantity: [0, Validators.compose([Validators.required])],
-      units: ['', Validators.compose([Validators.required])],
+      units: ['', Validators.compose([Validators.required])]
     });
   }
 
@@ -47,7 +47,6 @@ export class InventoryAddPage {
     if (!this.addGroceryForm.valid) {
       console.log('Form not ready');
     } else {
-      // All the logic will live here.
       let loading: Loading;
       loading = this.loadingCtrl.create();
       loading.present();
@@ -57,7 +56,6 @@ export class InventoryAddPage {
       const units: string = this.addGroceryForm.value.units;
 
       try {
-        // Here we'll talk to the provider
         await this.inventoryProvider.createGrocery(
           name,
           quantity,
@@ -71,10 +69,11 @@ export class InventoryAddPage {
         await loading.dismiss();
         const alert: Alert = this.alertCtrl.create({
           message: error.message,
-          buttons: [{ text: 'Ok', role: 'cancel' }],
+          buttons: [{ text: 'Ok', role: 'cancel' }]
         });
         alert.present();
       }
     }
   }
+
 }

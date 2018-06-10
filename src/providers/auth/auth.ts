@@ -3,22 +3,22 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
-  AngularFirestoreDocument,
+  AngularFirestoreDocument
 } from 'angularfire2/firestore';
 import firebase from 'firebase/app';
 import { userProfile } from '../../models/user-profile';
 import { teamProfile } from '../../models/team-profile';
+
 import { InventoryProvider } from '../inventory/inventory';
 
 @Injectable()
 export class AuthProvider {
+
   constructor(
     public afAuth: AngularFireAuth,
     public fireStore: AngularFirestore,
     public inventoryProvider: InventoryProvider
-  ) {
-    console.log('Hello AuthProvider Provider');
-  }
+  ) { }
 
   loginUser(email: string, password: string): Promise<firebase.User> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
@@ -44,7 +44,7 @@ export class AuthProvider {
 
       const userProfileDocument: AngularFirestoreDocument<
         userProfile
-      > = this.fireStore.doc(`userProfile/${adminUser.uid}`);
+        > = this.fireStore.doc(`userProfile/${adminUser.uid}`);
 
       const teamId: string = this.fireStore.createId();
 
@@ -52,23 +52,22 @@ export class AuthProvider {
         id: adminUser.uid,
         email: email,
         teamId: teamId,
-        teamAdmin: true,
+        teamAdmin: true
       });
 
       const teamProfile: AngularFirestoreDocument<
         teamProfile
-      > = this.fireStore.doc(`teamProfile/${teamId}`);
+        > = this.fireStore.doc(`teamProfile/${teamId}`);
 
       await teamProfile.set({
         id: teamId,
         teamAdmin: adminUser.uid,
-        groceryList: null,
+        groceryList: null
       });
 
       return adminUser;
     } catch (error) {
       console.error(error);
-      throw new Error();
     }
   }
 
@@ -77,15 +76,16 @@ export class AuthProvider {
 
     const userCollection: AngularFirestoreCollection<
       any
-    > = this.fireStore.collection(`teamProfile/${teamId}/teamMemberList`);
+      > = this.fireStore.collection(`teamProfile/${teamId}/teamMemberList`);
     const id: string = this.fireStore.createId();
 
     const regularUser = {
       id: id,
       email: email,
-      teamId: teamId,
+      teamId: teamId
     };
 
     return userCollection.add(regularUser);
   }
+
 }

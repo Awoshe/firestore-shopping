@@ -5,7 +5,7 @@ import {
   IonicPage,
   Loading,
   LoadingController,
-  NavController,
+  NavController
 } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmailValidator } from '../../validators/email';
@@ -14,7 +14,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 @IonicPage()
 @Component({
   selector: 'page-add-user',
-  templateUrl: 'add-user.html',
+  templateUrl: 'add-user.html'
 })
 export class AddUserPage {
   createUserForm: FormGroup;
@@ -29,8 +29,8 @@ export class AddUserPage {
     this.createUserForm = formBuilder.group({
       email: [
         '',
-        Validators.compose([Validators.required, EmailValidator.isValid]),
-      ],
+        Validators.compose([Validators.required, EmailValidator.isValid])
+      ]
     });
   }
 
@@ -51,7 +51,7 @@ export class AddUserPage {
         await loading.dismiss();
         const alert: Alert = this.alertCtrl.create({
           message: error.message,
-          buttons: [{ text: 'Ok', role: 'cancel' }],
+          buttons: [{ text: 'Ok', role: 'cancel' }]
         });
         alert.present();
       }

@@ -8,8 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
 admin.initializeApp();
 exports.createTeamMember = functions.firestore
     .document(`teamProfile/{teamId}/teamMemberList/{newUserId}`)
@@ -20,7 +20,7 @@ exports.createTeamMember = functions.firestore
     const newUser = yield admin.auth().createUser({
         uid: id,
         email: email,
-        password: '123456789',
+        password: '123456789'
     });
     yield admin
         .firestore()
@@ -29,7 +29,7 @@ exports.createTeamMember = functions.firestore
         email: email,
         id: id,
         teamId: teamId,
-        teamAdmin: false,
+        teamAdmin: false
     });
     return newUser;
 }));

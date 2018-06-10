@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Alert, AlertController, NavController } from 'ionic-angular';
 import { InventoryProvider } from '../../providers/inventory/inventory';
 import { Grocery } from '../../models/grocery';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'page-inventory',
@@ -14,7 +14,7 @@ export class InventoryPage {
     public navCtrl: NavController,
     public inventoryProvider: InventoryProvider,
     public alertCtrl: AlertController
-  ) {}
+  ) { }
 
   ionViewDidLoad() {
     this.inventoryProvider.getTeamId().then(teamId => {
@@ -24,13 +24,9 @@ export class InventoryPage {
     });
   }
 
-  addUser(): void {
-    this.navCtrl.push('AddUserPage');
-  }
+  addUser(): void { this.navCtrl.push('AddUserPage'); }
 
-  createGrocery(): void {
-    this.navCtrl.push('InventoryAddPage');
-  }
+  createGrocery(): void { this.navCtrl.push('InventoryAddPage'); }
 
   addGrocery(groceryId: string, teamId: string): void {
     const prompt: Alert = this.alertCtrl.create({
@@ -39,15 +35,15 @@ export class InventoryPage {
         {
           name: 'quantity',
           placeholder: '0',
-          type: 'number',
-        },
+          type: 'number'
+        }
       ],
       buttons: [
         {
           text: 'Cancel',
           handler: data => {
             console.log('Cancel clicked');
-          },
+          }
         },
         {
           text: 'Add',
@@ -58,9 +54,9 @@ export class InventoryPage {
               quantity,
               teamId
             );
-          },
-        },
-      ],
+          }
+        }
+      ]
     });
     prompt.present();
   }
@@ -72,15 +68,15 @@ export class InventoryPage {
         {
           name: 'quantity',
           placeholder: '0',
-          type: 'number',
-        },
+          type: 'number'
+        }
       ],
       buttons: [
         {
           text: 'Cancel',
           handler: data => {
             console.log('Cancel clicked');
-          },
+          }
         },
         {
           text: 'Take Out',
@@ -91,10 +87,11 @@ export class InventoryPage {
               quantity,
               teamId
             );
-          },
-        },
-      ],
+          }
+        }
+      ]
     });
     prompt.present();
   }
+
 }

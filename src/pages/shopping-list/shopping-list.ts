@@ -3,7 +3,7 @@ import {
   Alert,
   AlertController,
   NavController,
-  NavParams,
+  NavParams
 } from 'ionic-angular';
 import { InventoryProvider } from '../../providers/inventory/inventory';
 import { Observable } from 'rxjs';
@@ -14,6 +14,7 @@ import { Grocery } from '../../models/grocery';
   templateUrl: 'shopping-list.html',
 })
 export class ShoppingListPage {
+
   groceryList: Observable<Grocery[]>;
   pickedGroceryList: Observable<Grocery[]>;
   constructor(
@@ -21,7 +22,7 @@ export class ShoppingListPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public inventoryProvider: InventoryProvider
-  ) {}
+  ) { }
 
   ionViewDidLoad() {
     this.inventoryProvider.getTeamId().then(teamId => {
@@ -57,7 +58,7 @@ export class ShoppingListPage {
           text: 'Cancel',
           handler: data => {
             console.log('Cancel clicked');
-          },
+          }
         },
         {
           text: 'Add',
@@ -68,9 +69,9 @@ export class ShoppingListPage {
               quantityShopping,
               teamId
             );
-          },
-        },
-      ],
+          }
+        }
+      ]
     });
     prompt.present();
   }
@@ -82,15 +83,15 @@ export class ShoppingListPage {
         {
           name: 'quantity',
           placeholder: '0',
-          type: 'number',
-        },
+          type: 'number'
+        }
       ],
       buttons: [
         {
           text: 'Cancel',
           handler: data => {
             console.log('Cancel clicked');
-          },
+          }
         },
         {
           text: 'Add',
@@ -101,9 +102,9 @@ export class ShoppingListPage {
               quantityShopping,
               teamId
             );
-          },
-        },
-      ],
+          }
+        }
+      ]
     });
     prompt.present();
   }
@@ -115,15 +116,15 @@ export class ShoppingListPage {
         {
           name: 'quantity',
           placeholder: '0',
-          type: 'number',
-        },
+          type: 'number'
+        }
       ],
       buttons: [
         {
           text: 'Cancel',
           handler: data => {
             console.log('Cancel clicked');
-          },
+          }
         },
         {
           text: 'Take Out',
@@ -134,10 +135,11 @@ export class ShoppingListPage {
               quantityShopping,
               teamId
             );
-          },
-        },
-      ],
+          }
+        }
+      ]
     });
     prompt.present();
   }
+
 }

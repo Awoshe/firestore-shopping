@@ -15,17 +15,18 @@ export class ShoppingListAddPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public inventoryProvider: InventoryProvider
-  ) {}
+  ) { }
 
   ionViewDidLoad() {
     this.inventoryProvider.getTeamId().then(teamId => {
       this.groceryList = this.inventoryProvider
-        .getGroceryListForShoppingList(teamId, false)
-        .valueChanges();
+        .getGroceryListForShoppingList(teamId, false).valueChanges();
     });
   }
 
   addGrocery(groceryId: string, teamId: string): void {
     this.inventoryProvider.addGroceryToShoppingList(groceryId, teamId);
   }
+
+
 }
