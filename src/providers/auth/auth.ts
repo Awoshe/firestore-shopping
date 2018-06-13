@@ -37,19 +37,19 @@ export class AuthProvider {
     password: string
   ): Promise<firebase.User> {
     try {
-      const adminUser: firebase.User = await this.afAuth.auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-
+      const adminUserCredential: firebase.auth.UserCredential = await this.afAuth.auth
+        .createUserWithEmailAndPassword(
+          email,
+          password
+        );
       const userProfileDocument: AngularFirestoreDocument<
         userProfile
-        > = this.fireStore.doc(`userProfile/${adminUser.uid}`);
+        > = this.fireStore.doc(`userProfile/${adminUserCredential.user.uid}`);
 
       const teamId: string = this.fireStore.createId();
 
       await userProfileDocument.set({
-        id: adminUser.uid,
+        id: adminUserCredential.user.uid,
         email: email,
         teamId: teamId,
         teamAdmin: true
@@ -61,11 +61,11 @@ export class AuthProvider {
 
       await teamProfile.set({
         id: teamId,
-        teamAdmin: adminUser.uid,
+        teamAdmin: adminUserCredential.user.uid,
         groceryList: null
       });
 
-      return adminUser;
+      return adminUserCredential.user;
     } catch (error) {
       console.error(error);
     }
