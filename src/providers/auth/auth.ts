@@ -20,7 +20,7 @@ export class AuthProvider {
     public inventoryProvider: InventoryProvider
   ) { }
 
-  loginUser(email: string, password: string): Promise<firebase.User> {
+  loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
